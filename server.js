@@ -1,12 +1,9 @@
-const express = require('express');
-const app = express();
+require('dotenv').config();
+const app  = require('./src/app');
 
-app.get('/', (req, res) => {
-  res.send('Welcome to the AASC Server Application');
-});
+const PORT = process.env.PORT || 3500;
 
-const PORT = process.env.PORT || 4000;
-
+// Run Server
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+   console.log(`Server running in ${process.env.NODE_ENV} environment at ${process.env.BASE_URL}`);
 });
