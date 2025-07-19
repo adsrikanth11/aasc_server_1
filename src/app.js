@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const db = require('./config/db'); // Import database connection
 
 // Serve static files
 app.use('/public', express.static('public'));
