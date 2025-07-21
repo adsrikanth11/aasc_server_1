@@ -1,6 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
-const db = require('./config/db'); // Import database connection
+
+app.use(express.json()); // Middleware to parse JSON requests
+app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded data
+app.use(cors()); // Enable CORS for all routes
 
 // Serve static files
 app.use('/public', express.static('public'));
@@ -8,6 +12,9 @@ app.use('/public', express.static('public'));
 app.get('/', (req, res) => {
   res.send('Welcome to the AASC Server Application');
 });
+
+// Import routes
+app.use('/student', require('./routes/frontend/student_reg_form.route'));
 
 // 404 handler
 app.use((req, res, next) => {
