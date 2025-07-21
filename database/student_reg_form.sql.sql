@@ -1,0 +1,8 @@
+CREATE TABLE student_reg_form (
+   `username` VARCHAR(255) NOT NULL , 
+   `password` VARCHAR(255) NOT NULL , 
+   `email` VARCHAR(255) NOT NULL , 
+   `mobile` CHAR(10) NOT NULL , 
+   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+   `updated_at` DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP 
+) ENGINE = InnoDB;
