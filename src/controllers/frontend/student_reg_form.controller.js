@@ -20,6 +20,8 @@ exports.Student_Reg_Form = async (req, res) => {
 
 // POST /Apply
 exports.Student_App_Form = async (req, res) => {
+   console.log('Form received successfully:', req.body);
+   console.log('Image uploaded successfully:', req.file.filename);
 
    const application_id = generateApplicationId();
    
@@ -44,6 +46,10 @@ exports.Student_App_Form = async (req, res) => {
    // payload.updated_at = new Date().toISOString().slice(0, 19).replace('T', ' '); // 'YYYY-MM-DD HH:MM:SS'
    
    try {
+      // Add profile_image filename if uploaded
+      if (req.file) {
+         req.body.profile_image = req.file.filename;
+      }
       const Apply = await Student_Registration.Apply(req.body);
       res.status(201).json({ message: 'Application Submitted Succesfully', application_id: application_id });
    } catch (error) {
