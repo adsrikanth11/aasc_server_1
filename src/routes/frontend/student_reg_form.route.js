@@ -1,14 +1,23 @@
 const router      = require('express').Router();
 const upload      = require('../../middlewares/student_image_upload.middleware');
-const controller  = require('../../controllers/frontend/student_reg_form.controller');
+const Controller  = require('../../controllers/frontend/student_reg_form.Controller');
 
 // POST /student/register
-router.post('/register', controller.Student_Reg_Form);
+router.post('/register', Controller.RegisterStudent);
 
-// POST /student/apply
-router.post('/apply', upload.single('profile_image'), controller.Student_App_Form);
+// Get Verify email
+router.get('/verify-email', Controller.VerifyEmail);
 
 // POST /student/login
-router.post('/login', controller.Student_Login_Form);
+router.post('/login', Controller.Student_Login);
+
+// POST /student/apply
+router.post('/apply', 
+   upload.fields([
+      { name: 'profile_image', maxCount: 1 },
+      { name: 'signature_image', maxCount: 1 },
+   ]
+), Controller.Student_App_Form);
+
 
 module.exports = router;
